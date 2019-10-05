@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:jaxws="http://cxf.apache.org/jaxws"
+			 xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+         http://cxf.apache.org/jaxws
+         http://cxf.apache.org/schemas/jaxws.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+	<context:component-scan base-package="ru.basis.fias"/>
+
+	<context:property-placeholder location="classpath:ru/basis/fias.properties"/>
+
+	<import resource="ctx-datasource.xml"/>
+	<import resource="ctx-aop.xml"/>
+
+	<jaxws:endpoint
+			id="fias"
+			implementor="ru.basis.fias.ws.impl.FiasEndpointImpl"
+			address="/fias">
+	</jaxws:endpoint>
+
+</beans>

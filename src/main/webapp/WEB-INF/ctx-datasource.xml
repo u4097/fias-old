@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${db.connector}"/>
+		<property name="jdbcUrl" value="${db.url}"/>
+		<property name="user" value="${db.user}"/>
+		<property name="password" value="${db.password}"/>
+                
+                <property name="preferredTestQuery" value="select 1"/>
+                <property name="idleConnectionTestPeriod" value="10800"/>
+	</bean>
+
+	<bean id="ru.basis.fias.sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" autowire-candidate="true">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.transaction.auto_close_session">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ru.basis.fias.transactionManager"	class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="ru.basis.fias.sessionFactory" />
+		<property name="hibernateManagedSession" value="false"/>
+	</bean>
+
+</beans>
