@@ -13,7 +13,7 @@
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<hibernate.version>4.1.1.Final</hibernate.version>
-		<cxf.version>2.5.2</cxf.version>
+		<cxf.version>2.5.10</cxf.version>
 	</properties>
 
 	<repositories>
